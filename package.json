@@ -1,5 +1,5 @@
 {
-  "name": "@pangorgo/unleash-server",
+  "name": "unleash-server",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
