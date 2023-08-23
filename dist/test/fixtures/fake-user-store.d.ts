@@ -1,0 +1,30 @@
+import User, { IUser } from '../../lib/types/user';
+import { ICreateUser, IUserLookup, IUserStore } from '../../lib/types/stores/user-store';
+declare class UserStoreMock implements IUserStore {
+    data: IUser[];
+    idSeq: number;
+    constructor();
+    hasUser({ id, username, email, }: IUserLookup): Promise<number | undefined>;
+    destroy(): void;
+    exists(key: number): Promise<boolean>;
+    count(): Promise<number>;
+    get(key: number): Promise<IUser>;
+    insert(user: User): Promise<User>;
+    update(id: number, user: User): Promise<User>;
+    getByQuery({ id, username, email }: IUserLookup): Promise<IUser>;
+    getAll(): Promise<IUser[]>;
+    setPasswordHash(userId: number, passwordHash: string): Promise<void>;
+    getPasswordHash(id: number): Promise<string>;
+    delete(id: number): Promise<void>;
+    successfullyLogin(user: User): Promise<void>;
+    buildSelectUser(): any;
+    search(): Promise<IUser[]>;
+    getAllUsers(): Promise<IUser[]>;
+    getAllWithId(): Promise<IUser[]>;
+    incLoginAttempts(): Promise<void>;
+    deleteAll(): Promise<void>;
+    upsert(user: ICreateUser): Promise<IUser>;
+    getUserByPersonalAccessToken(secret: string): Promise<IUser>;
+    markSeenAt(secrets: string[]): Promise<void>;
+}
+export default UserStoreMock;

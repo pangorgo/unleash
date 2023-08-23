@@ -1,0 +1,1 @@
+import{aM as r,aN as a,r as o,aO as c}from"./index-4f80e427.js";const u=(e={})=>{const{data:t,error:n,mutate:s}=r(a("api/admin/metrics/rps"),i,e);return o.useMemo(()=>({metrics:t,loading:!n&&!t,refetch:()=>s(),error:n}),[t,n,s])},i=e=>fetch(e).then(c("Instance Metrics")).then(t=>t.json()),f=e=>!e||e==="undefined"?"unknown":e;export{f as a,u};

@@ -1,0 +1,34 @@
+import { IProjectHealthUpdate, IProjectInsert, IProjectStore, ProjectEnvironment } from '../../lib/types/stores/project-store';
+import { IEnvironment, IProject, IProjectWithCount } from '../../lib/types';
+import { IEnvironmentProjectLink, IProjectMembersCount } from 'lib/db/project-store';
+import { CreateFeatureStrategySchema } from '../../lib/openapi';
+export default class FakeProjectStore implements IProjectStore {
+    projects: IProject[];
+    projectEnvironment: Map<string, Set<string>>;
+    getEnvironmentsForProject(): Promise<ProjectEnvironment[]>;
+    getProjectLinksForEnvironments(environments: string[]): Promise<IEnvironmentProjectLink[]>;
+    addEnvironmentToProject(id: string, environment: string): Promise<void>;
+    getProjectsWithCounts(): Promise<IProjectWithCount[]>;
+    private createInternal;
+    create(project: IProjectInsert): Promise<IProject>;
+    delete(key: string): Promise<void>;
+    deleteAll(): Promise<void>;
+    deleteEnvironmentForProject(id: string, environment: string): Promise<void>;
+    destroy(): void;
+    count(): Promise<number>;
+    exists(key: string): Promise<boolean>;
+    get(key: string): Promise<IProject>;
+    getAll(): Promise<IProject[]>;
+    getMembersCountByProject(projectId: string): Promise<number>;
+    hasProject(id: string): Promise<boolean>;
+    importProjects(projects: IProjectInsert[], environments?: IEnvironment[]): Promise<IProject[]>;
+    update(update: IProjectInsert): Promise<void>;
+    updateHealth(healthUpdate: IProjectHealthUpdate): Promise<void>;
+    getMembersCount(): Promise<IProjectMembersCount[]>;
+    getProjectsByUser(userId: number): Promise<string[]>;
+    addEnvironmentToProjects(environment: string, projects: string[]): Promise<void>;
+    getMembersCountByProjectAfterDate(projectId: string, date: string): Promise<number>;
+    updateDefaultStrategy(projectId: string, environment: string, strategy: CreateFeatureStrategySchema): Promise<CreateFeatureStrategySchema>;
+    getDefaultStrategy(projectId: string, environment: string): Promise<CreateFeatureStrategySchema | null>;
+    isFeatureLimitReached(id: string): Promise<boolean>;
+}

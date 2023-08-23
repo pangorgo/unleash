@@ -2,7 +2,6 @@ node_modules
 lerna-debug
 npm-debug
 .DS_Store
-/dist
 
 # Logs
 logs
@@ -51,7 +50,6 @@ package-lock.json
 .env
 
 # Ignore frontend build
-frontend/build
 
 # Generated docs
 website/docs/reference/api/**/sidebar.js

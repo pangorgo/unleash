@@ -1,0 +1,33 @@
+import { IApplication } from './models';
+import { IUnleashStores } from '../../types/stores';
+import { IUnleashConfig } from '../../types/option';
+import { IClientApplication } from '../../types/stores/client-applications-store';
+import { IApplicationQuery } from '../../types/query';
+import { IClientApp } from '../../types/model';
+import { PartialSome } from '../../types/partial';
+export default class ClientInstanceService {
+    apps: {};
+    logger: any;
+    seenClients: Record<string, IClientApp>;
+    private timers;
+    private clientMetricsStoreV2;
+    private strategyStore;
+    private featureToggleStore;
+    private clientApplicationsStore;
+    private clientInstanceStore;
+    private eventStore;
+    private bulkInterval;
+    private announcementInterval;
+    constructor({ clientMetricsStoreV2, strategyStore, featureToggleStore, clientInstanceStore, clientApplicationsStore, eventStore, }: Pick<IUnleashStores, 'clientMetricsStoreV2' | 'strategyStore' | 'featureToggleStore' | 'clientApplicationsStore' | 'clientInstanceStore' | 'eventStore'>, { getLogger }: Pick<IUnleashConfig, 'getLogger'>, bulkInterval?: number, announcementInterval?: number);
+    registerInstance(data: PartialSome<IClientApp, 'instanceId'>, clientIp: string): Promise<void>;
+    registerClient(data: PartialSome<IClientApp, 'instanceId'>, clientIp: string): Promise<void>;
+    announceUnannounced(): Promise<void>;
+    clientKey(client: IClientApp): string;
+    bulkAdd(): Promise<void>;
+    getApplications(query: IApplicationQuery): Promise<IClientApplication[]>;
+    getApplication(appName: string): Promise<IApplication>;
+    deleteApplication(appName: string): Promise<void>;
+    createApplication(input: IApplication): Promise<void>;
+    removeInstancesOlderThanTwoDays(): Promise<void>;
+    destroy(): void;
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"extract-user.js","sourceRoot":"","sources":["../../../src/lib/util/extract-user.ts"],"names":[],"mappings":";;;AAEA,SAAgB,uBAAuB,CAAC,IAAW;IAC/C,OAAO,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,KAAK,IAAI,IAAI,CAAC,QAAQ,CAAC,CAAC,CAAC,SAAS,CAAC;AAC1D,CAAC;AAFD,0DAEC;AAED,SAAgB,eAAe,CAAC,GAAiB;IAC7C,OAAO,uBAAuB,CAAC,GAAG,CAAC,IAAI,CAAC,CAAC;AAC7C,CAAC;AAFD,0CAEC"}

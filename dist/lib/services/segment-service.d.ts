@@ -1,0 +1,36 @@
+import { IUnleashConfig } from '../types/option';
+import { IClientSegment, IUnleashStores } from '../types';
+import { IFeatureStrategy, ISegment } from '../types/model';
+import User from '../types/user';
+import { ISegmentService } from '../segments/segment-service-interface';
+import { IChangeRequestAccessReadModel } from '../features/change-request-access-service/change-request-access-read-model';
+export declare class SegmentService implements ISegmentService {
+    private logger;
+    private segmentStore;
+    private featureStrategiesStore;
+    private eventStore;
+    private changeRequestAccessReadModel;
+    private config;
+    private flagResolver;
+    constructor({ segmentStore, featureStrategiesStore, eventStore, }: Pick<IUnleashStores, 'segmentStore' | 'featureStrategiesStore' | 'eventStore'>, changeRequestAccessReadModel: IChangeRequestAccessReadModel, config: IUnleashConfig);
+    get(id: number): Promise<ISegment>;
+    getAll(): Promise<ISegment[]>;
+    getActive(): Promise<ISegment[]>;
+    getActiveForClient(): Promise<IClientSegment[]>;
+    getByStrategy(strategyId: string): Promise<ISegment[]>;
+    getStrategies(id: number): Promise<IFeatureStrategy[]>;
+    create(data: unknown, user: Partial<Pick<User, 'username' | 'email'>>): Promise<ISegment>;
+    update(id: number, data: unknown, user: User): Promise<void>;
+    unprotectedUpdate(id: number, data: unknown, user: User): Promise<void>;
+    delete(id: number, user: User): Promise<void>;
+    unprotectedDelete(id: number, user: User): Promise<void>;
+    cloneStrategySegments(sourceStrategyId: string, targetStrategyId: string): Promise<void>;
+    addToStrategy(id: number, strategyId: string): Promise<void>;
+    updateStrategySegments(strategyId: string, segmentIds: number[]): Promise<void>;
+    removeFromStrategy(id: number, strategyId: string): Promise<void>;
+    validateName(name: string): Promise<void>;
+    private validateStrategySegmentLimit;
+    private validateSegmentValuesLimit;
+    private validateSegmentProject;
+    private stopWhenChangeRequestsEnabled;
+}
